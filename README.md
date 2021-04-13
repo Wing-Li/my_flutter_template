@@ -7,7 +7,9 @@
 2. 在 Android 项目 AndroidManifest.xml 添加权限，修改 build.gradle 包名；
 3. 在 iOS 项目 Info.plist 文件，复制添加权限；
 
-    3.1 在根目录 cd ios 进入 iOS 项目， pod install 生成 Podfile 文件后，修改第一行为： platform :ios, '12.0'；
+    3.1 在根目录 cd ios 进入 iOS 项目，执行命令： pod install 生成 Podfile ；
+    
+    3.2 在 Podfile 文件修改第一行为： platform :ios, '12.0'；
     
     3.2 将最后的 post_install 修改为如下代码：
     
