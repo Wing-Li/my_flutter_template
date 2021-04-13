@@ -28,3 +28,6 @@
     ```
 
 4. 复制 lib 文件下的所有文件。
+5. 右键 lib 文件夹，选择“Replace in Path..”，将 "my_flutter_template" 替换成自己的项目名。
+
+*结束。*
