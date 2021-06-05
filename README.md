@@ -34,9 +34,15 @@
 
     3.1 在根目录 cd ios 进入 iOS 项目，执行命令： pod install 生成 Podfile ；
     
-    3.2 在 Podfile 文件修改第一行为： platform :ios, '12.0'；
+
+    3.2 修改 iOS 最低版本：
+   
+      1. 在 Podfile 文件修改第一行为： platform :ios, '12.0'；
+      2. 在 Runner/Info.plist 里将 LSMinimumSystemVersion 改为 12.0；
+      3. 在 Flutter/AppFrameworkInfo.plist 里将 MinimumOSVersion 改为 12.0；
+   
     
-    3.2 将最后的 post_install 修改为如下代码：
+    3.3 将最后的 post_install 修改为如下代码：
     
     ```
     post_install do |installer|
