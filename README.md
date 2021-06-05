@@ -42,6 +42,7 @@
       1. 在 Podfile 文件修改第一行为： platform :ios, '12.0'；
       2. 在 Runner/Info.plist 里将 LSMinimumSystemVersion 改为 12.0；
       3. 在 Flutter/AppFrameworkInfo.plist 里将 MinimumOSVersion 改为 12.0；
+      4. 点击根目录 Runner，在页面右边 TARGETS/Runner -> General -> Deployment Info 里 iphone 旁边的对应的 iOS 版本改为 12.1；
    
     
     3.3 将最后的 post_install 修改为如下代码：
