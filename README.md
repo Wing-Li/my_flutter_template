@@ -11,6 +11,8 @@
     2.2 修改 build.gradle 包名，修改签名文件：
     
     ```
+    // 生成签名的命令：keytool -genkey -v -keystore testprod.jks -alias testprod -storepass testprod -keypass testprod -keyalg RSA -keysize 2048 -validity 36500
+    
     signingConfigs {
         config {
             keyAlias 'test'
