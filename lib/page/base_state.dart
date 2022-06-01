@@ -70,7 +70,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
   void dataClear() {}
 
   // 2. 需子类重写
-  Future<int> fetchData() async {}
+  Future<int> fetchData() async {
+    return 0;
+  }
 
   void onRefreshData() async {
     dataClear();
@@ -115,7 +117,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
 
   // =================================== ↓ 常用自定义组件 ↓ ==========================================
 
-  Widget RoundButton(String text, Function onTap, {Color backgroundColor, Color textColor, bool isFullWidth = true}) {
+  Widget RoundButton(String text, Function()? onTap, {Color? backgroundColor, Color? textColor, bool isFullWidth = true}) {
     return ButtonTheme(
       height: 52,
       minWidth: isFullWidth ? double.infinity : 0,

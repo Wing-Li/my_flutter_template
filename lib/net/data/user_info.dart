@@ -1,16 +1,14 @@
 class UserInfo {
-  bool success;
-  int status;
-  String msg;
-  String userId;
-  String userName;
-  String userCode;
-  String companyId;
-  String companyName;
-  String token;
-  String refreshToken;
-
-  UserInfo({this.status, this.msg, this.userId, this.companyId});
+  bool? success;
+  int? status;
+  String? msg;
+  String? userId;
+  String? userName;
+  String? userCode;
+  String? companyId;
+  String? companyName;
+  String? token;
+  String? refreshToken;
 
   UserInfo.fromJson(Map<String, dynamic> json) {
     success = json['Success'];

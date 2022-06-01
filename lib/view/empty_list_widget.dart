@@ -3,12 +3,12 @@ import 'package:my_flutter_template/res/my_styles.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
 class EmptyListWidget extends StatefulWidget {
-  final String title;
+  final String? title;
   final String content;
   final String imageName;
 
   const EmptyListWidget({
-    Key key,
+    Key? key,
     this.title,
     this.content = "No data",
     this.imageName = "l_emptypage_new",
@@ -26,7 +26,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
         SizedBox(height: 114),
         Image.asset(MyUtils.getImage(widget.imageName)),
         SizedBox(height: 12),
-        MyUtils.isEmpty(widget.title) ? Container() : Text(widget.title, style: MyTextStyles.textWhiteBold(16), textAlign: TextAlign.center),
+        MyUtils.isEmpty(widget.title) ? Container() : Text(widget.title!, style: MyTextStyles.textWhiteBold(16), textAlign: TextAlign.center),
         SizedBox(height: 8),
         Container(
           margin: EdgeInsets.only(left: 64, right: 64),

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_template/res/my_theme.dart';
 
 class MyAppBar extends StatefulWidget {
-  final Widget leftWidget;
-  final Function onLeftTap;
-  final Widget titleWidget;
-  final Widget rightWidget;
-  final Function onRightTap;
+  final Widget? leftWidget;
+  final Function? onLeftTap;
+  final Widget? titleWidget;
+  final Widget? rightWidget;
+  final Function? onRightTap;
   final double iconWidth;
   final bool isShowStatusBar;
   final Color bgColor;
 
   const MyAppBar({
-    Key key,
+    Key? key,
     this.leftWidget,
     this.onLeftTap,
     this.titleWidget,
@@ -20,7 +20,7 @@ class MyAppBar extends StatefulWidget {
     this.onRightTap,
     this.iconWidth = 40,
     this.isShowStatusBar = true,
-    this.bgColor,
+    this.bgColor = MyTheme.white,
   }) : super(key: key);
 
   @override
@@ -58,7 +58,7 @@ class _MyAppBarState extends State<MyAppBar> {
     return GestureDetector(
       child: widget.leftWidget != null ? widget.leftWidget : Container(width: widget.iconWidth),
       onTap: () {
-        if (widget.onLeftTap != null) widget.onLeftTap();
+        if (widget.onLeftTap != null) widget.onLeftTap!();
       },
     );
   }
@@ -67,7 +67,7 @@ class _MyAppBarState extends State<MyAppBar> {
     return GestureDetector(
       child: widget.rightWidget != null ? widget.rightWidget : Container(width: widget.iconWidth),
       onTap: () {
-        if (widget.onRightTap != null) widget.onRightTap();
+        if (widget.onRightTap != null) widget.onRightTap!();
       },
     );
   }

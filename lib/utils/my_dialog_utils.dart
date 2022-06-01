@@ -5,72 +5,75 @@ import 'package:my_flutter_template/view/popup_alert_message_widget.dart';
 
 class MyDialogUtils {
   static void showMessageDialog(
-      BuildContext context,
-      String message, {
-        String title = "Notice",
-        String confirmText = "Confirm",
-        String cancelText = "Cancel",
-        Function onConfirmTap,
-        Function onCancelTap,
-        TextStyle messageStyle,
-      }) {
+    BuildContext context,
+    String message, {
+    String title = "提示",
+    String confirmText = "确认",
+    String cancelText = "取消",
+    Function? onConfirmTap,
+    Function? onCancelTap,
+    TextStyle? messageStyle,
+  }) {
     showDialog(
       context: context,
-      child: MyDialogWidget(
-        title: title,
-        message: message,
-        messageStyle: messageStyle,
-        confirmText: confirmText,
-        onConfirmTap: () {
-          if (onConfirmTap != null) onConfirmTap();
-        },
-        cancelText: cancelText,
-        onCancelTap: () {
-          if (onCancelTap != null) onCancelTap();
-        },
-      ),
+      builder: (BuildContext context) {
+        return MyDialogWidget(
+          title: title,
+          message: message,
+          messageStyle: messageStyle,
+          confirmText: confirmText,
+          onConfirmTap: () {
+            if (onConfirmTap != null) onConfirmTap();
+          },
+          cancelText: cancelText,
+          onCancelTap: () {
+            if (onCancelTap != null) onCancelTap();
+          },
+        );
+      },
     );
   }
 
   static void showCustomDialog(
-      BuildContext context, {
-        String title = "Notice",
-        String message,
-        Widget child,
-        String confirmText = "Confirm",
-        String cancelText = "Cancel",
-        Function onConfirmTap,
-        Function onCancelTap,
-        TextStyle messageStyle,
-      }) {
+    BuildContext context, {
+    String title = "提示",
+    String? message,
+    Widget? child,
+    String confirmText = "确认",
+    String cancelText = "取消",
+    Function? onConfirmTap,
+    Function? onCancelTap,
+    TextStyle? messageStyle,
+  }) {
     showDialog(
       context: context,
-      child: MyDialogWidget(
-        title: title,
-        message: message,
-        child: child,
-        messageStyle: messageStyle,
-        confirmText: confirmText,
-        onConfirmTap: () {
-          if (onConfirmTap != null) onConfirmTap();
-        },
-        cancelText: cancelText,
-        onCancelTap: () {
-          if (onCancelTap != null) onCancelTap();
-        },
-      ),
+      builder: (BuildContext context) {
+        return MyDialogWidget(
+          title: title,
+          message: message,
+          child: child,
+          messageStyle: messageStyle,
+          confirmText: confirmText,
+          onConfirmTap: () {
+            if (onConfirmTap != null) onConfirmTap();
+          },
+          cancelText: cancelText,
+          onCancelTap: () {
+            if (onCancelTap != null) onCancelTap();
+          },
+        );
+      },
     );
   }
 
-
   static void showPopupAlertMessageSheet(
-      BuildContext context,
-      String message, {
-        String confirmText = "Sure",
-        String cancelText = "Cancel",
-        Function onConfirmTap,
-        Function onCancelTap,
-      }) {
+    BuildContext context,
+    String message, {
+    String confirmText = "确定",
+    String cancelText = "取消",
+    Function? onConfirmTap,
+    Function? onCancelTap,
+  }) {
     showModalBottomSheet(
       context: context,
       elevation: 10,
@@ -92,21 +95,21 @@ class MyDialogUtils {
     );
   }
 
-  // static void showFilterSheet(
-  //     BuildContext context, {
-  //       KDIX_FilterListUserModel filterModel,
-  //       OnSelectFilterResultCallBack onSelectFilterResultCallBack,
-  //     }) {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true,
-  //     backgroundColor: EO_Theme.transparent,
-  //     builder: (context) {
-  //       return KDIX_FilterBottomPopup(
-  //         filterModel: filterModel,
-  //         onSelectFilterResultCallBack: onSelectFilterResultCallBack,
-  //       );
-  //     },
-  //   );
-  // }
+// static void showFilterSheet(
+//     BuildContext context, {
+//       KDIX_FilterListUserModel filterModel,
+//       OnSelectFilterResultCallBack onSelectFilterResultCallBack,
+//     }) {
+//   showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true,
+//     backgroundColor: EO_Theme.transparent,
+//     builder: (context) {
+//       return KDIX_FilterBottomPopup(
+//         filterModel: filterModel,
+//         onSelectFilterResultCallBack: onSelectFilterResultCallBack,
+//       );
+//     },
+//   );
+// }
 }

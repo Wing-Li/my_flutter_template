@@ -3,19 +3,17 @@
 /// Date: 2019/11/27 0027
 /// email: maoqitian068@163.com
 /// des:  loading 效果使用 flutter_spinkit 库
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter_template/res/my_theme.dart';
-
-import 'loading/loading.dart';
 
 class LoadingWidget extends StatefulWidget {
   String loadingText;
   bool outsideDismiss;
 
-  Function dismissDialog;
+  Function? dismissDialog;
 
   LoadingWidget({
-    Key key,
+    Key? key,
     this.loadingText = "loading...",
     this.outsideDismiss = true,
     this.dismissDialog,
@@ -30,7 +28,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
   void initState() {
     super.initState();
     if (widget.dismissDialog != null) {
-      widget.dismissDialog(() {
+      widget.dismissDialog!(() {
         /// 将关闭 Loading 的方法传递到调用的页面.
         Navigator.of(context).pop();
       });
@@ -44,7 +42,9 @@ class _LoadingWidgetState extends State<LoadingWidget> {
       child: Material(
         type: MaterialType.transparency,
         child: Center(
-          child: LoadingIndicator(color: MyTheme.text_block_gray_light),
+          child: CupertinoActivityIndicator(
+            radius: 20,
+          ),
         ),
       ),
     );

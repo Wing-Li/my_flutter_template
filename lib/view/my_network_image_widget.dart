@@ -11,16 +11,16 @@ import 'package:octo_image/octo_image.dart';
 
 class MyNetworkImage extends StatelessWidget {
   final String url;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
-  final String placeholderPath;
-  final Widget placeholderWidget;
+  final String? placeholderPath;
+  final Widget? placeholderWidget;
   final bool isRound;
 
   const MyNetworkImage(
     this.url, {
-    Key key,
+    Key? key,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
@@ -32,7 +32,7 @@ class MyNetworkImage extends StatelessWidget {
   /// 占位图
   _placeholderWidget() {
     if (!MyUtils.isEmpty(this.placeholderPath))
-      return Image.asset(MyUtils.getImage(this.placeholderPath), width: double.infinity, height: double.infinity, fit: BoxFit.fill);
+      return Image.asset(MyUtils.getImage(this.placeholderPath!), width: double.infinity, height: double.infinity, fit: BoxFit.fill);
 
     if (this.placeholderWidget != null) {
       return placeholderWidget;

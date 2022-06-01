@@ -4,22 +4,22 @@ import 'package:my_flutter_template/res/my_theme.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
 class PopuAlertMessageWidget extends StatefulWidget {
-  final Widget child;
-  final String message;
+  final Widget? child;
+  final String? message;
   final String confirmText;
-  final Color confirmBgColor;
-  final Function onConfirmTap;
+  final Color? confirmBgColor;
+  final Function? onConfirmTap;
   final String cancelText;
-  final Function onCancelTap;
+  final Function? onCancelTap;
 
   const PopuAlertMessageWidget({
-    Key key,
+    Key? key,
     this.child,
     this.message,
-    this.confirmText = "Sure",
+    this.confirmText = "确定",
     this.confirmBgColor,
     this.onConfirmTap,
-    this.cancelText = "Cancel",
+    this.cancelText = "取消",
     this.onCancelTap,
   }) : super(key: key);
 
@@ -38,13 +38,13 @@ class _PopuAlertMessageWidgetState extends State<PopuAlertMessageWidget> {
           children: [
             SizedBox(height: 16),
             widget.child != null
-                ? widget.child
+                ? widget.child!
                 : Container(
                     color: MyTheme.transparent,
                     height: 54,
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 60),
-                    child: Text(widget.message, style: MyTextStyles.textGrayDeep(14), textAlign: TextAlign.center),
+                    child: Text(widget.message ?? "", style: MyTextStyles.textGrayDeep(14), textAlign: TextAlign.center),
                   ),
             InkWell(
               child: Container(
@@ -62,7 +62,7 @@ class _PopuAlertMessageWidgetState extends State<PopuAlertMessageWidget> {
               ),
               onTap: () {
                 MyUtils.disMissLoadingDialog(context);
-                if (widget.onConfirmTap != null) widget.onConfirmTap();
+                if (widget.onConfirmTap != null) widget.onConfirmTap!();
               },
             ),
             SizedBox(height: 16),
@@ -78,7 +78,7 @@ class _PopuAlertMessageWidgetState extends State<PopuAlertMessageWidget> {
                   textColor: MyTheme.text_block_gray_deep,
                   onPressed: () {
                     MyUtils.disMissLoadingDialog(context);
-                    if (widget.onCancelTap != null) widget.onCancelTap();
+                    if (widget.onCancelTap != null) widget.onCancelTap!();
                   },
                 ),
               ),

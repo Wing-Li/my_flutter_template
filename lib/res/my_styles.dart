@@ -5,12 +5,12 @@ import 'my_theme.dart';
 class MyTextStyles {
   static TextStyle base({
     double size = 14,
-    Color color,
+    Color? color,
     bool isBold = false,
     bool isFontWeightBold = false,
     bool isItalic = false,
-    TextDecoration textDecoration,
-    String fontFamily,
+    TextDecoration? textDecoration,
+    String? fontFamily,
   }) =>
       TextStyle(
         fontSize: size,
@@ -29,7 +29,7 @@ class MyTextStyles {
       double size, {
         bool isFontWeightBold = true,
         Color color = MyTheme.white,
-        String fontFamily = "Berg-Regular",
+        String fontFamily = "Avenir-Bold",
       }) =>
       base(
         size: size,
@@ -58,7 +58,7 @@ class MyTextStyles {
         bool isBold = false,
         bool isFontWeightBold = false,
         bool isItalic = false,
-        TextDecoration textDecoration,
+        TextDecoration? textDecoration,
       }) =>
       base(
         size: size,
@@ -76,7 +76,7 @@ class MyTextStyles {
     isFontWeightBold: isFontWeightBold,
   );
 
-  static TextStyle textGray(double size, {bool isBold = false, TextDecoration textDecoration}) => base(
+  static TextStyle textGray(double size, {bool isBold = false, TextDecoration? textDecoration}) => base(
     size: size,
     color: MyTheme.text_white_gray_light,
     isBold: isBold,

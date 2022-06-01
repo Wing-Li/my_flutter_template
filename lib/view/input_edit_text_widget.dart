@@ -5,20 +5,20 @@ import 'package:my_flutter_template/res/my_theme.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
 class InputEditTextWidget extends StatefulWidget {
-  final String title;
+  final String? title;
   final String inputText;
   final String hintText;
-  final int maxLength;
+  final int? maxLength;
   final bool isEnabled;
   final bool isShowClearIcon;
   final TextInputType keyboardType;
-  final FocusNode focusNode;
-  final Function(String) onChangedTap;
-  final Function(String) onSubmittedTap;
-  final Function onClearTap;
+  final FocusNode? focusNode;
+  final Function(String)? onChangedTap;
+  final Function(String)? onSubmittedTap;
+  final Function? onClearTap;
 
   const InputEditTextWidget({
-    Key key,
+    Key? key,
     this.title,
     this.inputText = "",
     this.hintText = "请输入...",
@@ -69,7 +69,7 @@ class _InputEditTextWidgetState extends BaseState<InputEditTextWidget> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(width: 12),
-          Container(width: 70, child: Text(widget.title, style: MyTextStyles.textGrayDeep(14))),
+          Container(width: 70, child: Text(widget.title ?? "请输入", style: MyTextStyles.textGrayDeep(14))),
           Expanded(
             child: Container(
               child: TextField(
@@ -90,19 +90,19 @@ class _InputEditTextWidgetState extends BaseState<InputEditTextWidget> {
                   border: OutlineInputBorder(borderSide: BorderSide.none),
                   // contentPadding: EdgeInsets.all(0),
                   hintText: widget.hintText,
-                  hintStyle:  MyTextStyles.textGrayDeep(14),
-                  labelStyle:  MyTextStyles.textGrayDeep(12),
+                  hintStyle: MyTextStyles.textGrayDeep(14),
+                  labelStyle: MyTextStyles.textGrayDeep(12),
                 ),
                 keyboardType: widget.keyboardType,
                 onChanged: (value) {
                   _inputText = value;
-                  if (widget.onChangedTap != null) widget.onChangedTap(value);
+                  if (widget.onChangedTap != null) widget.onChangedTap!(value);
                 },
                 // onAppPrivateCommand: (value, map) {
                 //   if (widget.onSubmittedTap != null) widget.onSubmittedTap(value);
                 // },
                 onSubmitted: (value) {
-                  if (widget.onSubmittedTap != null) widget.onSubmittedTap(value);
+                  if (widget.onSubmittedTap != null) widget.onSubmittedTap!(value);
                 },
               ),
             ),
@@ -111,13 +111,13 @@ class _InputEditTextWidgetState extends BaseState<InputEditTextWidget> {
           Offstage(
             offstage: !widget.isShowClearIcon,
             child: GestureDetector(
-              child: Container(width: 48, height: 48, child: Icon(Icons.close, color:  MyTheme.text_block_gray_light)),
+              child: Container(width: 48, height: 48, child: Icon(Icons.close, color: MyTheme.text_block_gray_light)),
               onTap: () {
                 setState(() {
                   _inputText = "";
                 });
 
-                if (widget.onClearTap != null) widget.onClearTap();
+                if (widget.onClearTap != null) widget.onClearTap!();
               },
             ),
           ),

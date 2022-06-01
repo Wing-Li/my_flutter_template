@@ -22,7 +22,7 @@ class DateUtils {
   }
 
   static String formatCountdownTime(int seconds) {
-    if (seconds <= 0) return null;
+    if (seconds <= 0) return "";
 
     var d = Duration(seconds: seconds);
     List<String> parts = d.toString().split(':');

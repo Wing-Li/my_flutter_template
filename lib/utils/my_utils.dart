@@ -1,36 +1,23 @@
 import 'dart:io';
 import 'dart:math';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
-import 'package:my_flutter_template/common/config.dart';
-import 'package:my_flutter_template/my_app.dart';
-import 'package:my_flutter_template/res/my_styles.dart';
-import 'package:my_flutter_template/view/loading_widget.dart';
-import 'package:my_flutter_template/view/my_page_fade_route_builder.dart';
-import 'package:my_flutter_template/view/my_page_slide_route_builder.dart';
-import 'package:package_info/package_info.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'my_page_route_builder.dart';
 
 class MyUtils {
   static bool isProd() {
-    return MyApp.env == ENV.PRODUCTION;
+    return true;
   }
 
   /// 判断 字符串 是否为空
-  static bool isEmpty(String str) {
-    return str == null || str.length <= 0;
-  }
-
-  /// 邮箱正则
-  static const String regexEmail = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\$";
-
-  /// 检查是否是邮箱格式
-  static bool isEmail(String input) {
-    if (input == null || input.isEmpty) return false;
-    return new RegExp(regexEmail).hasMatch(input);
+  static bool isEmpty(String? str) {
+    return str == null || str.isEmpty;
   }
 
   static double getScreenWidth(BuildContext context) {
@@ -41,10 +28,13 @@ class MyUtils {
     return MediaQuery.of(context).size.height;
   }
 
-  /// 获取当前程序的版本号
-  static Future<String> getAppVersionName() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.version;
+  /// 邮箱正则
+  static const String regexEmail = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\$";
+
+  /// 检查是否是邮箱格式
+  static bool isEmail(String input) {
+    if (isEmpty(input)) return false;
+    return RegExp(regexEmail).hasMatch(input);
   }
 
   /// 跳转页面
@@ -53,12 +43,12 @@ class MyUtils {
   }
 
   /// 跳转页面，带渐变动画
-  static Future<Map> startPageGradient(BuildContext context, Widget page, {int duration = 500}) async {
+  static Future<Map> startPageGradient(BuildContext context, Widget page, {int duration = 350}) async {
     return await Navigator.push(context, MyPageFadeTransitionRouteBuilder(page, duration: duration));
   }
 
   /// 从下往上划出
-  static Future<Map> startPageUpAnim(BuildContext context, Widget page, {int duration = 500}) async {
+  static Future<Map> startPageUpAnim(BuildContext context, Widget page, {int duration = 350}) async {
     return await Navigator.push(context, MyPageSlideTransitionRouteBuilder(page, duration: duration));
   }
 
@@ -71,32 +61,8 @@ class MyUtils {
     );
   }
 
-  static void gotoAppStore() {
-    // String appStoreComment = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${Application.config[Config.APP_ID]}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8";
-
-    String appStoreComment;
-    if (Platform.isIOS) {
-      appStoreComment = "itms-apps://itunes.apple.com/app/id${MyApp.config[Config.APP_ID]}?action=write-review";
-    } else if (Platform.isAndroid) {
-      appStoreComment = "https://play.google.com/store/apps/details?id=${MyApp.config[Config.PACKAGE_NAME]}";
-    }
-    openUrl(appStoreComment);
-  }
-
-  /// 打开 Url
-  static void openUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  static exitApp() async {
-    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-  }
-
-  static void popPage(BuildContext context, {Map map}) {
+  /// 关闭页面
+  static void popPage(BuildContext context, {Map? map}) {
     if (map != null) {
       Navigator.of(context).pop(map);
     } else {
@@ -104,37 +70,53 @@ class MyUtils {
     }
   }
 
-  static var logger = Logger();
+  /// 关闭App
+  static exitApp() async {
+    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+  }
+
+  /// 打开 Url
+  static void openUrl(String url) async {
+    var uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  static final _logger = Logger();
 
   /// 打印 log
-  static void log(dynamic object, {String method}) {
-    if (!MyUtils.isProd()) {
-      logger.d(object);
+  static void log(dynamic object, {String? method}) {
+    if (!isProd()) {
+      if (!isEmpty(method)) _logger.d("方法：$method");
+      _logger.d(object);
     }
   }
 
   /// 复制文字
   static void copyText(String text) {
     Clipboard.setData(ClipboardData(text: text));
-    showToast(msg: '复制成功');
+    showToast('复制成功');
   }
 
   /// 获取剪贴板上的文字
-  static String getCopyText() {
-    return Clipboard.getData(Clipboard.kTextPlain)?.toString();
+  static Future<String> getCopyText() async {
+    var data = await Clipboard.getData(Clipboard.kTextPlain);
+    return data?.text ?? "";
   }
 
   /// 分享
-  static void shareText(String content, {String title}) {
+  static void shareText(String content, {String? title}) {
     Share.share(content, subject: title);
   }
 
   /// 显示 Toast
-  static void showToast({String msg, bool isLongTime = false}) {
-    BotToast.showNotification(
-      title: (_) => Text(msg, style: MyTextStyles.text(16), textAlign: TextAlign.center),
+  static void showToast(String msg, {bool isLongTime = false}) {
+    BotToast.showText(
+      text: msg,
       duration: Duration(milliseconds: isLongTime ? 2500 : 1500),
-      backgroundColor: Colors.white,
     );
   }
 
@@ -143,42 +125,34 @@ class MyUtils {
     return "assets/images/$imageName.$format";
   }
 
-  //获取主题颜色
-  static Color getPrimaryColor(BuildContext context) {
-    return Theme.of(context).primaryColor;
-  }
-
   static bool isLoadingDialog = false;
 
   /// 隐藏 Dialog
   static void disMissLoadingDialog(BuildContext context) {
     isLoadingDialog = false;
 
-    Navigator.of(context).pop();
+    BotToast.closeAllLoading();
   }
 
   /// 显示Loading
   static void showLoading(BuildContext context, {String loadText = "loading..."}) {
     isLoadingDialog = true;
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) {
-        return new LoadingWidget(
-          outsideDismiss: false,
-          loadingText: loadText,
-        );
-      },
-    );
+    BotToast.showLoading();
+    // BotToast.showCustomLoading(toastBuilder: (cancelFunc) {
+    //   return LoadingWidget(
+    //     outsideDismiss: false,
+    //     loadingText: loadText,
+    //   );
+    // });
   }
 
   //Dialog 封装
   static void showAlertDialog(
       BuildContext context,
       String contentText, {
-        Function confirmCallback,
-        Function dismissCallback,
+        Function? confirmCallback,
+        Function? dismissCallback,
         String confirmText = "确定",
         String cancelText = "取消",
         String title = "提示",
@@ -196,8 +170,8 @@ class MyUtils {
             actions: <Widget>[
               Offstage(
                 offstage: !isShowCancel,
-                child: FlatButton(
-                  child: Text(cancelText, style: TextStyle(color: Colors.black)),
+                child: TextButton(
+                  child: Text(cancelText, style: const TextStyle(color: Colors.black)),
                   onPressed: () {
                     if (isAutoClose) Navigator.of(context).pop();
 
@@ -207,8 +181,8 @@ class MyUtils {
                   },
                 ),
               ),
-              FlatButton(
-                child: Text(confirmText, style: TextStyle(color: Colors.black)),
+              TextButton(
+                child: Text(confirmText, style: const TextStyle(color: Colors.black)),
                 onPressed: () {
                   if (isAutoClose) Navigator.of(context).pop();
 
@@ -226,20 +200,6 @@ class MyUtils {
         );
       },
     );
-  }
-
-  static Color getRandomColor() {
-    Random random = Random();
-    var temp = random.nextInt(6);
-    List<Color> colors = [
-      Colors.blueAccent,
-      Colors.yellowAccent,
-      Colors.redAccent,
-      Colors.purpleAccent,
-      Colors.lightGreenAccent,
-      Colors.deepOrangeAccent,
-    ];
-    return colors[temp];
   }
 
   ///递归方式删除目录
@@ -283,33 +243,31 @@ class MyUtils {
     return diff;
   }
 
-  static String listToStr(List list) {
-    if (list == null || list.length <= 0) return "";
+  /// 列表转字符串
+  static String listToStr(List? list) {
+    if (list == null || list.isEmpty) return "";
 
-    StringBuffer stringBuffer = new StringBuffer();
-    list?.forEach((it) {
+    StringBuffer stringBuffer = StringBuffer();
+    list.forEach((it) {
       stringBuffer.write(it);
       stringBuffer.write(", ");
     });
     return stringBuffer.toString();
   }
 
-  static String enumToString(o) => o.toString().split('.').last;
-
+  /// 获取文件的后缀名
   static String getPathSuffixName(String path) {
     return path.substring(path.lastIndexOf(".") + 1);
   }
 
+  /// 获取文件名
   static String getPathFileName(String path) {
     return path.substring(path.lastIndexOf("/") + 1);
   }
 
-  static int getRandomDistance() {
-    return Random().nextInt(250);
-  }
-
+  /// 获取指定的随机数
   static int random(int start, int end) {
-    Random random = new Random();
+    Random random = Random();
     return random.nextInt(end) % (end - start + 1) + start;
   }
 }

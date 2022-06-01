@@ -2,6 +2,8 @@
 
 #### 创建 Flutter 项目的模板：
 
+使用 Flutter 3.0.0 , Dart 2.17.0
+
 0. 创建一个新项目，项目名自己填；
 1. 在 pubspec.yaml 复制第三方库，添加 images 、 fonts 类型。 在根目录创建 assets/images 、 assets/fonts 文件；
 2. 在 Android 项目 AndroidManifest.xml 添加权限，修改 build.gradle 包名等；
