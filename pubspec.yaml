@@ -76,7 +76,7 @@ dependencies:
 
 # 数据
   # 网络请求
-  dio: ^4.0.6
+  dio: ^5.1.2
   # synchronized
   synchronized: ^3.0.0+2
   # shared_preferences
@@ -88,11 +88,6 @@ dependencies:
 
 # 第三方 SDK
 
-dependency_overrides:
-  pull_to_refresh:
-    git:
-      url: https://github.com/miquelbeltran/flutter_pulltorefresh
-      ref: master
 
 dev_dependencies:
   flutter_test:

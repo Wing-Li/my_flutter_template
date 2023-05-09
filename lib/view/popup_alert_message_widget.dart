@@ -70,7 +70,7 @@ class _PopuAlertMessageWidgetState extends State<PopuAlertMessageWidget> {
               margin: EdgeInsets.symmetric(horizontal: 28),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(28),
-                child: FlatButton(
+                child: MaterialButton(
                   minWidth: double.infinity,
                   height: 56,
                   child: Text(widget.cancelText, style: MyTextStyles.textGray(14)),

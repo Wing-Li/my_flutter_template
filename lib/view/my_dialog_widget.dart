@@ -95,7 +95,7 @@ class _MyDialogWidgetState extends State<MyDialogWidget> {
   _conformButton(String text, Function? onTap) {
     return ButtonTheme(
       minWidth: double.infinity,
-      child: RaisedButton(
+      child: MaterialButton(
         padding: EdgeInsets.only(top: 15, bottom: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
@@ -118,7 +118,7 @@ class _MyDialogWidgetState extends State<MyDialogWidget> {
   _cancelButton() {
     return ButtonTheme(
       minWidth: double.infinity,
-      child: RaisedButton(
+      child: MaterialButton(
         padding: EdgeInsets.only(top: 15, bottom: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),

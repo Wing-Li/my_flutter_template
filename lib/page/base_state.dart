@@ -121,7 +121,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
     return ButtonTheme(
       height: 52,
       minWidth: isFullWidth ? double.infinity : 0,
-      child: RaisedButton(
+      child: MaterialButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         color: backgroundColor == null ? MyTheme.main : backgroundColor,
         // elevation: 1,
