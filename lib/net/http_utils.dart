@@ -17,26 +17,24 @@ class HttpUtils {
   late Dio _dio;
 
   HttpUtils._internal() {
-    if (null == _dio) {
-      _dio = new Dio(BaseOptions(
-        // baseUrl : Api.BASE_URL,
-        connectTimeout: Duration(seconds: 30),
-        sendTimeout: Duration(seconds: 30),
-        receiveTimeout: Duration(seconds: 30),
-        contentType: Headers.jsonContentType,
-      ));
+    _dio = new Dio(BaseOptions(
+      // baseUrl : Api.BASE_URL,
+      connectTimeout: Duration(seconds: 30),
+      sendTimeout: Duration(seconds: 30),
+      receiveTimeout: Duration(seconds: 30),
+      contentType: Headers.jsonContentType,
+    ));
 
-      _dio.transformer = _MyTransformer();
-      _dio.interceptors.add(_MyInterceptors());
-    }
+    _dio.transformer = _MyTransformer();
+    _dio.interceptors.add(_MyInterceptors());
   }
 
   Future<Response?> get(
-      String url, {
-        Map<String, dynamic>? headers,
-        Map<String, dynamic>? params,
-        bool isAddLoading = false,
-      }) async {
+    String url, {
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? params,
+    bool isAddLoading = false,
+  }) async {
     Response response;
 
     //显示 加载中的 loading
@@ -69,12 +67,12 @@ class HttpUtils {
   }
 
   Future<Response?> post(
-      String url, {
-        Map<String, dynamic>? headers,
-        Map<String, dynamic>? mapData,
-        FormData? formData,
-        bool isAddLoading = false,
-      }) async {
+    String url, {
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? mapData,
+    FormData? formData,
+    bool isAddLoading = false,
+  }) async {
     Response response;
 
     //显示 加载中的 loading
