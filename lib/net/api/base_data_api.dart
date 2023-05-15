@@ -5,20 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:my_flutter_template/net/api/api_url.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
-import 'http_utils.dart';
+import '../data/base_call_back_data.dart';
+import '../http_utils.dart';
 
-DataApi dataApi = new DataApi();
-
-class DataApi {
-  //私有构造函数
-  DataApi._internal();
-
-  //保存单例
-  static final DataApi _singleton = DataApi._internal();
-
-  //工厂构造函数
-  factory DataApi() => _singleton;
-
+abstract class BaseDataApi {
   /// 基础 Header
   Map<String, String> _getBaseHeaders() {
     return {
@@ -27,37 +17,38 @@ class DataApi {
   }
 
   /// get 基类方法
-  dynamic get(
-      String api, {
-        Map<String, dynamic>? data,
-        bool isNeedToken = true,
-      }) async {
+  Future<T?> get<T>(
+    String api, {
+    Map<String, dynamic>? data,
+    bool isNeedToken = true,
+  }) async {
     Map<String, String> headers = _getBaseHeaders();
-    headers["up-encode"] = "0";
 
     Response? response = await httpUtils.get(ApiUrl.BASE_URL + api, params: data, headers: headers);
 
     if (response == null) {
       return null;
     } else {
-      return response.data;
+      var dataMap = response.data;
+      return BaseCallBackData<T>.fromJson(dataMap).data;
     }
   }
 
   /// post 基类方法
-  dynamic post(
-      String api, {
-        Map<String, dynamic>? data,
-        bool isNeedToken = true,
-      }) async {
+  Future<T?> post<T>(
+    String api, {
+    Map<String, dynamic>? data,
+    bool isNeedToken = true,
+  }) async {
     Map<String, String> headers = _getBaseHeaders();
 
-    Response? response = await httpUtils.post(ApiUrl.BASE_URL + api, mapData: data, headers: headers);
+    Response? response = await httpUtils.post(ApiUrl.BASE_URL + api, headers: headers, mapData: data);
 
     if (response == null) {
       return null;
     } else {
-      return response.data;
+      var dataMap = response.data;
+      return BaseCallBackData<T>.fromJson(dataMap).data;
     }
   }
 
@@ -73,7 +64,6 @@ class DataApi {
       return response.data;
     }
   }
-
 
   String _TYPE_PHOTO = "TYPE_PHOTO";
   String _TYPE_VIDEO = "TYPE_VIDEO";
