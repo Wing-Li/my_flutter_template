@@ -121,9 +121,10 @@ class _MyInterceptors extends InterceptorsWrapper {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     MyUtils.log(''
         '------------------------请求开始------------------------'
+        '\n- 请求Url：${options.uri}'
         '\n- 请求方式：${options.method}'
         '\n- 请求头信息：${options.headers}'
-        '\n- 请求数据: ${options.data}'
+        '\n- 请求数据: ${options.queryParameters}'
         '');
     return handler.next(options);
   }
