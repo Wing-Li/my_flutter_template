@@ -59,11 +59,11 @@ class _MyDialogWidgetState extends State<MyDialogWidget> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                MyUtils.isEmpty(widget.title) ? Container() : Text(widget.title!, style: MyTextStyles.textBlock(16)),
+                MyUtils.isEmpty(widget.title) ? Container() : Text(widget.title!, style: MyTextStyles.textBold(18)),
                 MyUtils.isEmpty(widget.title) ? Container() : SizedBox(height: 16),
                 // 如果没有传入 message ，则一定是自定义布局
                 _contentView(),
-                SizedBox(height: 32),
+                SizedBox(height: 42),
                 MyUtils.isEmpty(widget.confirmText) ? Container() : _conformButton(widget.confirmText!, widget.onConfirmTap),
                 MyUtils.isEmpty(widget.doubleConfirmText) ? Container() : SizedBox(height: 10),
                 MyUtils.isEmpty(widget.doubleConfirmText) ? Container() : _conformButton(widget.doubleConfirmText!, widget.onDoubleConfirmTap),
@@ -85,7 +85,7 @@ class _MyDialogWidgetState extends State<MyDialogWidget> {
             margin: EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               widget.message!,
-              style: widget.messageStyle == null ? MyTextStyles.textGray(14) : widget.messageStyle,
+              style: widget.messageStyle == null ? MyTextStyles.textGrayDeep(14) : widget.messageStyle,
               textAlign: TextAlign.center,
             ),
           );

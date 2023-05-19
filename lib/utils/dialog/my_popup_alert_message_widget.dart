@@ -3,7 +3,7 @@ import 'package:my_flutter_template/res/my_styles.dart';
 import 'package:my_flutter_template/res/my_theme.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
-class PopuAlertMessageWidget extends StatefulWidget {
+class MyPopupAlertMessageWidget extends StatefulWidget {
   final Widget? child;
   final String? message;
   final String confirmText;
@@ -12,7 +12,7 @@ class PopuAlertMessageWidget extends StatefulWidget {
   final String cancelText;
   final Function? onCancelTap;
 
-  const PopuAlertMessageWidget({
+  const MyPopupAlertMessageWidget({
     Key? key,
     this.child,
     this.message,
@@ -24,10 +24,10 @@ class PopuAlertMessageWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PopuAlertMessageWidgetState createState() => _PopuAlertMessageWidgetState();
+  _MyPopupAlertMessageWidgetState createState() => _MyPopupAlertMessageWidgetState();
 }
 
-class _PopuAlertMessageWidgetState extends State<PopuAlertMessageWidget> {
+class _MyPopupAlertMessageWidgetState extends State<MyPopupAlertMessageWidget> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

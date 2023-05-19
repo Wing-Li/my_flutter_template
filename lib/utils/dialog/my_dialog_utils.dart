@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_template/res/my_theme.dart';
-import 'package:my_flutter_template/view/my_dialog_widget.dart';
-import 'package:my_flutter_template/view/popup_alert_message_widget.dart';
+import 'package:my_flutter_template/utils/dialog/my_dialog_widget.dart';
+import 'package:my_flutter_template/utils/dialog/my_popup_alert_message_widget.dart';
 
 class MyDialogUtils {
   static void showMessageDialog(
@@ -80,7 +80,7 @@ class MyDialogUtils {
       backgroundColor: MyTheme.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       builder: (context) {
-        return PopuAlertMessageWidget(
+        return MyPopupAlertMessageWidget(
           message: message,
           confirmText: confirmText,
           onConfirmTap: () {
