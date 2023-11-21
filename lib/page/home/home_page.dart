@@ -16,7 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BaseState<HomePage> {
-  List<Widget> pages = [MessagePage(title: "广场"), MessagePage(title: "列表"), MessagePage(title: "首页"), MessagePage(title: "信息"), MePage()];
+  List<Widget> pages = [
+    MessagePage(title: "广场"),
+    MessagePage(title: "列表"),
+    MessagePage(title: "首页"),
+    MessagePage(title: "信息"),
+    MePage(),
+  ];
   int currentIndex = 2;
   PageController _pageController = new PageController(initialPage: 2);
   bool isShowUnRead = false;

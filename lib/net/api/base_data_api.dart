@@ -1,54 +1,59 @@
-import 'dart:collection';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:my_flutter_template/net/api/api_url.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
-import '../data/base_call_back_data.dart';
 import '../http_utils.dart';
 
 abstract class BaseDataApi {
   /// 基础 Header
   Map<String, String> _getBaseHeaders() {
     return {
-      "Content-Type": "application/json; charset=utf-8",
+      // "Content-Type": "application/json; charset=utf-8",
     };
   }
 
   /// get 基类方法
-  Future<T?> get<T>(
-    String api, {
+  Future<dynamic> get(
+    String apiUrl, {
     Map<String, dynamic>? data,
-    bool isNeedToken = true,
   }) async {
     Map<String, String> headers = _getBaseHeaders();
 
-    Response? response = await httpUtils.get(ApiUrl.BASE_URL + api, params: data, headers: headers);
+    Response? response = await httpUtils.get(apiUrl, params: data, headers: headers);
 
     if (response == null) {
+      _errorOpt(response);
       return null;
     } else {
       var dataMap = response.data;
-      return BaseCallBackData<T>.fromJson(dataMap).data;
+      // 根据不同项目，这里返回自己相应的 data。 ps：dataMap.data["data"]
+      return dataMap["data"];
     }
   }
 
   /// post 基类方法
-  Future<T?> post<T>(
-    String api, {
+  Future<dynamic> post(
+    String apiUrl, {
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? data,
-    bool isNeedToken = true,
   }) async {
     Map<String, String> headers = _getBaseHeaders();
 
-    Response? response = await httpUtils.post(ApiUrl.BASE_URL + api, headers: headers, mapData: data);
+    Response? response = await httpUtils.post(
+      apiUrl,
+      headers: headers,
+      queryParameters: queryParameters,
+      mapData: data,
+    );
 
     if (response == null) {
+      _errorOpt(response);
       return null;
     } else {
       var dataMap = response.data;
-      return BaseCallBackData<T>.fromJson(dataMap).data;
+      // 根据不同项目，这里返回自己相应的 data。 ps：dataMap.data["data"]
+      return dataMap.data;
     }
   }
 
@@ -56,9 +61,10 @@ abstract class BaseDataApi {
   dynamic postFile(String api, FormData formData) async {
     Map<String, String> headers = _getBaseHeaders();
 
-    Response? response = await httpUtils.post(ApiUrl.BASE_URL + api, formData: formData, headers: headers);
+    Response? response = await httpUtils.post(api, formData: formData, headers: headers);
 
     if (response == null) {
+      _errorOpt(response);
       return null;
     } else {
       return response.data;

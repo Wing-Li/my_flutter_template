@@ -57,7 +57,7 @@ class MyUtils {
     return await Navigator.pushAndRemoveUntil(
       context,
       new MaterialPageRoute(builder: (context) => page),
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
   }
 
@@ -128,14 +128,14 @@ class MyUtils {
   static bool isLoadingDialog = false;
 
   /// 隐藏 Dialog
-  static void disMissLoadingDialog(BuildContext context) {
+  static void disMissLoadingDialog() {
     isLoadingDialog = false;
 
     BotToast.closeAllLoading();
   }
 
   /// 显示Loading
-  static void showLoading(BuildContext context, {String loadText = "loading..."}) {
+  static void showLoading({String loadText = "loading..."}) {
     isLoadingDialog = true;
 
     BotToast.showLoading();
@@ -149,16 +149,16 @@ class MyUtils {
 
   //Dialog 封装
   static void showAlertDialog(
-      BuildContext context,
-      String contentText, {
-        Function? confirmCallback,
-        Function? dismissCallback,
-        String confirmText = "确定",
-        String cancelText = "取消",
-        String title = "提示",
-        bool isShowCancel = true,
-        bool isAutoClose = true,
-      }) async {
+    BuildContext context,
+    String contentText, {
+    Function? confirmCallback,
+    Function? dismissCallback,
+    String confirmText = "确定",
+    String cancelText = "取消",
+    String title = "提示",
+    bool isShowCancel = true,
+    bool isAutoClose = true,
+  }) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!

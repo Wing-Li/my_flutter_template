@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 import 'package:my_flutter_template/utils/my_utils.dart';
 
 HttpUtils httpUtils = HttpUtils();
@@ -26,15 +27,16 @@ class HttpUtils {
 
     _dio.transformer = _MyTransformer();
     _dio.interceptors.add(_MyInterceptors());
+    _dio.interceptors.add(LoggyDioInterceptor(requestHeader: true, requestBody: true));
   }
 
-  Future<Response<T?>?> get<T>(
+  Future<Response?> get(
     String url, {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? params,
     bool isAddLoading = false,
   }) async {
-    Response<T> response;
+    Response response;
 
     //显示 加载中的 loading
     if (isAddLoading) {
@@ -65,15 +67,15 @@ class HttpUtils {
     }
   }
 
-  Future<Response<T?>?> post<T>(
+  Future<Response?> post(
     String url, {
     Map<String, dynamic>? headers,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? mapData,
     FormData? formData,
-    Object? data,
     bool isAddLoading = false,
   }) async {
-    Response<T> response;
+    Response response;
 
     //显示 加载中的 loading
     if (isAddLoading) {
@@ -85,10 +87,10 @@ class HttpUtils {
 
       if (formData != null) {
         response = await _dio.post(url, data: formData);
-      } else if (mapData is Map && mapData != null) {
-        response = await _dio.post(url, queryParameters: mapData);
-      } else if (data != null) {
-        response = await _dio.post(url, data: json.encode(data));
+      } else if (queryParameters is Map && queryParameters != null) {
+        response = await _dio.post(url, queryParameters: queryParameters);
+      } else if (mapData != null) {
+        response = await _dio.post(url, data: mapData);
       } else {
         response = await _dio.post(url);
       }

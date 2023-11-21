@@ -1,6 +1,7 @@
 import 'dart:collection';
 
-import '../data/user_data.dart';
+import 'package:my_flutter_template/net/data/yiyan_enity.dart';
+
 import 'api_url.dart';
 import 'base_data_api.dart';
 
@@ -16,20 +17,15 @@ class DataApi extends BaseDataApi {
   //工厂构造函数
   factory DataApi() => _singleton;
 
-  Future<UserData?> login(
-    String userName,
-    String passWord,
-  ) async {
+  Future<YiyanData?> randomYiYan() async {
     Map<String, dynamic> map = HashMap();
-    map["userName"] = userName;
-    map["passWord"] = passWord;
+    var data = await get(ApiUrl.API_YIYAN, data: map);
 
-    UserData? userData = await post<UserData>(ApiUrl.API_LOGIN, data: map);
-
-    if (userData == null) {
+    if (data == null) {
       return null;
     } else {
-      return userData;
+      return YiyanData.fromJson(data);
     }
   }
+
 }

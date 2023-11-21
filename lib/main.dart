@@ -1,6 +1,8 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:my_flutter_template/page/home/home_page.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -36,18 +38,27 @@ class MyAppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Title',
-      //1.调用BotToastInit
-      builder: BotToastInit(),
-      //2.注册路由观察者
-      navigatorObservers: [BotToastNavigatorObserver()],
-      theme: ThemeData(
-        textTheme: TextTheme(),
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: initWidget,
+    final botToastBuilder = BotToastInit();
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: (ctx, child) {
+        return GetMaterialApp(
+          title: 'Title',
+          //1.调用BotToastInit
+          builder: (BuildContext context, Widget? child) {
+            child = botToastBuilder(context, child);
+            return child;
+          },
+          //2.注册路由观察者
+          navigatorObservers: [BotToastNavigatorObserver()],
+          theme: ThemeData(
+            textTheme: TextTheme(),
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: initWidget,
+        );
+      },
     );
   }
 

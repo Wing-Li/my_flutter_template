@@ -61,7 +61,7 @@ class _MyPopupAlertMessageWidgetState extends State<MyPopupAlertMessageWidget> {
                 ),
               ),
               onTap: () {
-                MyUtils.disMissLoadingDialog(context);
+                MyUtils.disMissLoadingDialog();
                 if (widget.onConfirmTap != null) widget.onConfirmTap!();
               },
             ),
@@ -77,7 +77,7 @@ class _MyPopupAlertMessageWidgetState extends State<MyPopupAlertMessageWidget> {
                   color: MyTheme.bg_gray_tran,
                   textColor: MyTheme.text_block_gray_deep,
                   onPressed: () {
-                    MyUtils.disMissLoadingDialog(context);
+                    MyUtils.disMissLoadingDialog();
                     if (widget.onCancelTap != null) widget.onCancelTap!();
                   },
                 ),

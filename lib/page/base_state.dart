@@ -66,6 +66,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
   // =================================== ↓ 下拉刷新与上拉加载 ↓ ==========================================
   RefreshController mRefreshController = RefreshController(initialRefresh: false);
 
+  //end 3. 需子类重写
   // 3. 需子类重写
   void dataClear() {}
 
@@ -96,6 +97,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
     }
   }
 
+  // start 0. 先在 main 设置全局配置
   // 1. 先写 ListView
   Widget RefresherView(
     Widget child, {
@@ -117,24 +119,34 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
 
   // =================================== ↓ 常用自定义组件 ↓ ==========================================
 
-  Widget RoundButton(String text, Function()? onTap, {Color? backgroundColor, Color? textColor, bool isFullWidth = true}) {
-    return ButtonTheme(
-      height: 52,
-      minWidth: isFullWidth ? double.infinity : 0,
-      child: MaterialButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        color: backgroundColor == null ? MyTheme.main : backgroundColor,
-        // elevation: 1,
-        highlightElevation: 0,
-        disabledElevation: 0,
-        onPressed: onTap,
-        child: Text(
-          text,
-          style: MyTextStyles.base(
-            size: 16,
-            color: textColor == null ? MyTheme.white : textColor,
-            isFontWeightBold: true,
-            isBold: false,
+  Widget RoundButton(
+    String text,
+    Function()? onTap, {
+    Color? backgroundColor,
+    Color? textColor,
+    bool isFullWidth = true,
+    double? width,
+  }) {
+    return SizedBox(
+      width: width,
+      child: ButtonTheme(
+        height: 52,
+        minWidth: isFullWidth ? double.infinity : 0,
+        child: MaterialButton(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          color: backgroundColor == null ? MyTheme.main : backgroundColor,
+          // elevation: 1,
+          highlightElevation: 0,
+          disabledElevation: 0,
+          onPressed: onTap,
+          child: Text(
+            text,
+            style: MyTextStyles.base(
+              size: 16,
+              color: textColor == null ? MyTheme.white : textColor,
+              isFontWeightBold: true,
+              isBold: false,
+            ),
           ),
         ),
       ),

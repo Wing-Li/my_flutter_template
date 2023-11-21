@@ -1,4 +1,4 @@
-class DateUtils {
+class MyDateUtils {
   static String getCurrentTime() {
     DateTime date = DateTime.now();
     return "${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}";

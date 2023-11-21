@@ -105,7 +105,7 @@ class _MyDialogWidgetState extends State<MyDialogWidget> {
         highlightElevation: 0,
         disabledElevation: 0,
         onPressed: () {
-          if (widget.isDisMissConfirm) MyUtils.disMissLoadingDialog(context);
+          if (widget.isDisMissConfirm) MyUtils.disMissLoadingDialog();
 
           if (onTap != null) onTap();
         },
@@ -130,7 +130,7 @@ class _MyDialogWidgetState extends State<MyDialogWidget> {
         highlightColor: MyTheme.transparent,
         splashColor: MyTheme.transparent,
         onPressed: () {
-          MyUtils.disMissLoadingDialog(context);
+          MyUtils.disMissLoadingDialog();
 
           if (widget.onCancelTap != null) {
             widget.onCancelTap!();
