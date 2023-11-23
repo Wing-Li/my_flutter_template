@@ -270,4 +270,15 @@ class MyUtils {
     Random random = Random();
     return random.nextInt(end) % (end - start + 1) + start;
   }
+
+  /// 随机获取一个颜色
+  static Color randomColor({double a = 1}) {
+    Random random = Random();
+    return Color.fromARGB(
+      (a * 255).toInt(),
+      random.nextInt(255),
+      random.nextInt(255),
+      random.nextInt(255),
+    );
+  }
 }
