@@ -31,15 +31,46 @@
 
   <title>my_flutter_template</title>
   <link rel="manifest" href="manifest.json">
+  <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer></script>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#000000"/>
+  <script defer="defer" src="/static/js/main.efb53050.js"></script>
+  <link href="/static/css/main.6484ec9b.css" rel="stylesheet">
 
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
+
+    function getPersonInfo() {
+        // 获取要点击的按钮元素
+        const button = document.getElementById('btn-login');
+        // 触发点击事件
+        button.click();
+
+        const Person = {
+            name: 'John',
+            sex: 'women',
+            age: 36,
+        }
+        const jsonString = JSON.stringify(Person)
+        return jsonString;
+    }
+
+   function getMyAddress() {
+        const addressObj = window.getMyAddress();
+        console.log(JSON.stringify(addressObj))
+        const jsonString = JSON.stringify(addressObj)
+        return jsonString;
+    }
+
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <div id="root"></div>
+
   <!-- Loading indicator -->
   <div id="loading">
     <style>
