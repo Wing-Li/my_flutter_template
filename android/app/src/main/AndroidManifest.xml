@@ -35,7 +35,11 @@
 
     <application
         android:label="Flutter模板"
-        android:icon="@mipmap/ic_launcher">
+        android:name=".MyApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="false"
+        android:fullBackupOnly="false">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
