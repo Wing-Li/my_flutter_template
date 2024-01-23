@@ -51,9 +51,17 @@ android {
 
     buildTypes {
         debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources false
             signingConfig signingConfigs.config
         }
         release {
+            minifyEnabled false
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources false
             signingConfig signingConfigs.config
         }
     }
