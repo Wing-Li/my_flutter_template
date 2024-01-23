@@ -31,7 +31,6 @@
 .pub/
 /build/
 pubspec.lock
-
 # Web related
 
 # Symbolication related

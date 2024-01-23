@@ -43,9 +43,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'lyl'
-            keyPassword 'lyllyl'
+            keyPassword '123456'
             storeFile file('lyl.jks')
-            storePassword 'lyllyl'
+            storePassword '123456'
         }
     }
 
