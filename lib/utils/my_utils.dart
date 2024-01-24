@@ -121,7 +121,7 @@ class MyUtils {
   }
 
   ///获取本地资源图片
-  static String getImage(String imageName, {String format: 'png'}) {
+  static String getImage(String imageName, {String format = 'png'}) {
     return "assets/images/$imageName.$format";
   }
 

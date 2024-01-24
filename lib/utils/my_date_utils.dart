@@ -9,6 +9,49 @@ class MyDateUtils {
     return "${date.year}-${date.month < 10 ? "0${date.month}" : date.month}-${date.day < 10 ? "0${date.day}" : date.day}";
   }
 
+  static String formatDateDH(int millisecondsSinceEpoch) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    return "${date.year}-${date.month < 10 ? "0${date.month}" : date.month}-${date.day < 10 ? "0${date.day}" : date.day} "
+        "${date.hour < 10 ? '0${date.hour}' : date.hour}:${date.minute < 10 ? '0${date.minute}' : date.minute}:${date.second < 10 ? '0${date.second}' : date.second}";
+  }
+
+  static String formatDate(DateTime date) {
+    return "${date.year}-${date.month < 10 ? "0${date.month}" : date.month}-${date.day < 10 ? "0${date.day}" : date.day} "
+        "${date.hour < 10 ? '0${date.hour}' : date.hour}:${date.minute < 10 ? '0${date.minute}' : date.minute}:${date.second < 10 ? '0${date.second}' : date.second}";
+  }
+
+  static String formatDayZH(int millisecondsSinceEpoch) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    return "${date.year}年${date.month < 10 ? "0${date.month}" : date.month}月${date.day < 10 ? "0${date.day}" : date.day}日";
+  }
+
+  static String formatDayHourZHByMill(int millisecondsSinceEpoch) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    return "${date.year}年${date.month < 10 ? "0${date.month}" : date.month}月${date.day < 10 ? "0${date.day}" : date.day}日"
+        " ${date.hour < 10 ? '0${date.hour}' : date.hour}时";
+  }
+
+  static String formatDayHourZH(String time) {
+    DateTime date = DateTime.parse(time);
+    return "${date.year}年${date.month < 10 ? "0${date.month}" : date.month}月${date.day < 10 ? "0${date.day}" : date.day}日"
+        " ${date.hour < 10 ? '0${date.hour}' : date.hour}时";
+  }
+
+  static String formatDayHourSecondZH(DateTime date) {
+    return "${date.year}年${date.month < 10 ? "0${date.month}" : date.month}月${date.day < 10 ? "0${date.day}" : date.day}日"
+        "${date.hour < 10 ? '0${date.hour}' : date.hour}时${date.minute < 10 ? '0${date.minute}' : date.minute}分${date.second < 10 ? '0${date.second}' : date.second}秒";
+  }
+
+  static String formatDay(int millisecondsSinceEpoch) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    return "${date.year}-${date.month < 10 ? "0${date.month}" : date.month}-${date.day < 10 ? "0${date.day}" : date.day}";
+  }
+
+  static String formatHour(int millisecondsSinceEpoch) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    return "${date.hour < 10 ? '0${date.hour}' : date.hour}:${date.minute < 10 ? '0${date.minute}' : date.minute}";
+  }
+
   static String getTime(String formattedString) {
     DateTime date = DateTime.parse(formattedString);
     return "${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}";

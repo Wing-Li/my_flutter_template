@@ -2,7 +2,7 @@
 
 #### 创建 Flutter 项目的模板：
 
-使用 Flutter 3.0.0 , Dart 2.17.0
+使用 Flutter 3.16.4 , Dart 3.2.3
 
 0. 创建一个新项目，项目名自己填；
 1. 在 pubspec.yaml 复制第三方库，添加 images 、 fonts 类型。 在根目录创建 assets/images 、 assets/fonts 文件；
@@ -29,6 +29,9 @@
             signingConfig signingConfigs.config
         }
         release {
+            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources false
             signingConfig signingConfigs.config
         }
     }

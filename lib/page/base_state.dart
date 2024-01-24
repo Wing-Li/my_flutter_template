@@ -54,6 +54,8 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Widgets
         break;
       case AppLifecycleState.detached:
         break;
+      case AppLifecycleState.hidden:
+        break;
     }
   }
 

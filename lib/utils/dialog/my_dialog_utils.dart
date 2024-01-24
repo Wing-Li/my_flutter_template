@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_flutter_template/res/my_theme.dart';
 import 'package:my_flutter_template/utils/dialog/my_dialog_widget.dart';
 import 'package:my_flutter_template/utils/dialog/my_popup_alert_message_widget.dart';
 
 class MyDialogUtils {
   static void showMessageDialog(
-    BuildContext context,
     String message, {
     String title = "提示",
     String confirmText = "确认",
@@ -15,7 +15,7 @@ class MyDialogUtils {
     TextStyle? messageStyle,
   }) {
     showDialog(
-      context: context,
+      context: Get.context!,
       builder: (BuildContext context) {
         return MyDialogWidget(
           title: title,
@@ -34,8 +34,7 @@ class MyDialogUtils {
     );
   }
 
-  static void showCustomDialog(
-    BuildContext context, {
+  static void showCustomDialog({
     String title = "提示",
     String? message,
     Widget? child,
@@ -46,7 +45,7 @@ class MyDialogUtils {
     TextStyle? messageStyle,
   }) {
     showDialog(
-      context: context,
+      context: Get.context!,
       builder: (BuildContext context) {
         return MyDialogWidget(
           title: title,
@@ -67,7 +66,6 @@ class MyDialogUtils {
   }
 
   static void showPopupAlertMessageSheet(
-    BuildContext context,
     String message, {
     String confirmText = "确定",
     String cancelText = "取消",
@@ -75,7 +73,7 @@ class MyDialogUtils {
     Function? onCancelTap,
   }) {
     showModalBottomSheet(
-      context: context,
+      context: Get.context!,
       elevation: 10,
       backgroundColor: MyTheme.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
