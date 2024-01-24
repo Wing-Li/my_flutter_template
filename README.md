@@ -1,4 +1,4 @@
-# My Flutter Template
+# Flutter 项目脚手架（Flutter Template）
 
 #### 创建 Flutter 项目的模板：
 
